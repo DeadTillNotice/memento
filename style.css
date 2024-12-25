@@ -1,0 +1,134 @@
+/* ------------------------------------
+   1. Google Fonts Import
+--------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Meddon&display=swap');
+
+/* ------------------------------------
+   2. Reset / Basic Styles
+--------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #000; /* Fallback if image doesn't load */
+  color: #fff;
+}
+
+/* ------------------------------------
+   3. Font
+--------------------------------------- */
+body {
+  font-family: 'Meddon', cursive;
+}
+
+/* ------------------------------------
+   4. Starry Night Background
+--------------------------------------- */
+.starry-night-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("your-starry-night.jpg") no-repeat center center / cover;
+  z-index: -1; /* behind main content */
+}
+
+/* ------------------------------------
+   5. Main Content Container
+--------------------------------------- */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 200vh; /* ensures plenty of scroll space */
+}
+
+/* ------------------------------------
+   6. Title Section
+--------------------------------------- */
+.title-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.title-section h1 {
+  font-size: 4rem;
+  color: #f9d4d4; /* soft pinkish tone for Xmas vibe */
+  animation: fadeout 3s forwards;
+  animation-delay: 2s; /* wait 2 seconds before fading out */
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+  }
+}
+
+/* ------------------------------------
+   7. Intro Text
+--------------------------------------- */
+.intro-text {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+/* ------------------------------------
+   8. Map Containers
+--------------------------------------- */
+.map-container {
+  width: 100%;
+  height: 600px;
+  margin: 2rem 0;
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+
+/* ------------------------------------
+   9. Transition Message
+--------------------------------------- */
+.transition-message {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+/* We'll show this message by adding a class in JS */
+.show-transition-message {
+  opacity: 1 !important;
+}
+
+/* ------------------------------------
+   10. World Map Section
+--------------------------------------- */
+.world-map-section {
+  min-height: 100vh;
+  display: none; /* hidden initially, revealed in JS */
+  align-items: center;
+  justify-content: center;
+}
+
+.show-world-map {
+  display: flex !important;
+}
