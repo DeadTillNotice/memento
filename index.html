@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Four Christmases Ago</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-o8MN1O8ICHTB2o9w6uGp3+REyNCpPZ2OgDy++6qeejk="
+    crossorigin=""
+  />
+
+  <!-- Our Main CSS File -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Starry background is handled in style.css -->
+  <div class="starry-night-bg"></div>
+
+  <div class="content">
+    <!-- Title Section -->
+    <section class="title-section">
+      <h1>Four Christmases Ago...</h1>
+    </section>
+    
+    <!-- Intro Text -->
+    <section class="intro-text">
+      <p>Hey paopao, four Christmases ago, you held me tightly in your arms, you showed me your city, your home...</p>
+      <p>Scroll down to see our special map of Naples.</p>
+    </section>
+
+    <!-- Naples Map Section -->
+    <section class="naples-map-section">
+      <div id="mapNaples" class="map-container"></div>
+    </section>
+
+    <!-- Transition Message (hidden initially) -->
+    <section class="transition-message">
+      <p>Love of my life, I wish to create more memories with you everywhere... enough memories to fill our world.</p>
+    </section>
+
+    <!-- World Map Section (hidden initially) -->
+    <section class="world-map-section">
+      <div id="mapWorld" class="map-container"></div>
+    </section>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-QV5j1M3D96nVAf5HYBYClbVprZTJy6waddD2Au2xE3w="
+    crossorigin="">
+  </script>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>
