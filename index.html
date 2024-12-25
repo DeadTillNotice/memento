@@ -5,7 +5,7 @@
   <title>Four Christmases Ago</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Leaflet CSS -->
+  <!-- Leaflet CSS (for maps) -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -13,12 +13,12 @@
     crossorigin=""
   />
 
-  <!-- Our Main CSS File -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Starry background is handled in style.css -->
-  <div class="starry-night-bg"></div>
+  <!-- We don't need a separate .starry-night-bg div because
+       we're creating the background + stars purely in CSS. -->
 
   <div class="content">
     <!-- Title Section -->
@@ -37,25 +37,34 @@
       <div id="mapNaples" class="map-container"></div>
     </section>
 
-    <!-- Transition Message (hidden initially) -->
+    <!-- Transition Message (appears after all markers are clicked) -->
     <section class="transition-message">
       <p>Love of my life, I wish to create more memories with you everywhere... enough memories to fill our world.</p>
     </section>
 
-    <!-- World Map Section (hidden initially) -->
+    <!-- World Map Section (hidden until triggered) -->
     <section class="world-map-section">
       <div id="mapWorld" class="map-container"></div>
     </section>
+
+    <!-- Final Paragraph -->
+    <section class="final-paragraph">
+      <p>
+        Merry Christmas, my love.<br />
+        Let’s fill the world with our memories—hand in hand, heart in heart.
+      </p>
+    </section>
+
   </div>
 
-  <!-- Leaflet JS -->
+  <!-- Leaflet JS (for maps) -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-QV5j1M3D96nVAf5HYBYClbVprZTJy6waddD2Au2xE3w="
     crossorigin="">
   </script>
 
-  <!-- Custom JS -->
+  <!-- Your Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
