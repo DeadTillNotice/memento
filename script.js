@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   /* ------------------------------------
      A. Initialize Naples Map
+     Using a dark tile layer for a 'night' vibe
   --------------------------------------- */
   const naplesMap = L.map("mapNaples").setView([40.8518, 14.2681], 13);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '© OpenStreetMap'
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution: '© OpenStreetMap, © CARTO'
   }).addTo(naplesMap);
 
   /* ------------------------------------
@@ -44,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const marker = L.marker(point.coords).addTo(naplesMap);
     marker.bindPopup(point.message);
 
-    // Increment visitedCount on marker click
     marker.on("click", () => {
       visitedCount++;
       if (visitedCount === totalPoints) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
      C. Reveal Transition & World Map
   --------------------------------------- */
   function revealTransitionMessage() {
-    // Hide Naples map section (optional effect)
+    // Hide Naples map section
     document.querySelector(".naples-map-section").style.display = "none";
 
     // Show transition message
@@ -73,8 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initWorldMap() {
     const worldMap = L.map("mapWorld").setView([20, 0], 2);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '© OpenStreetMap'
+
+    // Also use a dark tile layer for the world map
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      attribution: '© OpenStreetMap, © CARTO'
     }).addTo(worldMap);
 
     // Optionally add a marker or popup
