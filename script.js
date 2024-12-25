@@ -1,83 +1,174 @@
-document.addEventListener("DOMContentLoaded", () => {
-  /* ------------------------------------
-     A. Initialize Naples Map
-  --------------------------------------- */
-  const naplesMap = L.map("mapNaples").setView([40.8518, 14.2681], 13);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '© OpenStreetMap'
-  }).addTo(naplesMap);
+/* ------------------------------------
+   1. Importing Fonts
+   - Meddon for the title
+   - Poppins for other text
+--------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Meddon&family=Poppins:wght@400;600&display=swap');
 
-  /* ------------------------------------
-     B. Memory Markers in Naples
-  --------------------------------------- */
-  const memoryPoints = [
-    {
-      coords: [40.8686, 14.2588],
-      message: "I had the best time ever with your hand in mine and your little bed"
-    },
-    {
-      coords: [40.8502, 14.2592],
-      message: "Our very first dinner together"
-    },
-    {
-      coords: [40.8508, 14.2556],
-      message: "We sat on the bench for hours talking about Leopardi. You're the love of my life."
-    },
-    {
-      coords: [40.8598, 14.2495],
-      message: "The stranger place where we got to know each other"
-    },
-    {
-      coords: [40.8831, 14.2900],
-      message: "I miss you and your kisses"
-    },
-    {
-      coords: [40.8522, 14.2532],
-      message: "We got Howard here :')"
-    }
-  ];
+/* ------------------------------------
+   2. Reset / Basic Styles
+--------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  let visitedCount = 0;
-  const totalPoints = memoryPoints.length;
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
 
-  memoryPoints.forEach(point => {
-    const marker = L.marker(point.coords).addTo(naplesMap);
-    marker.bindPopup(point.message);
+/* ------------------------------------
+   3. Gradient + Starry Background
+--------------------------------------- */
+body {
+  /* We'll apply a gradient background and overlay stars with a pseudo-element */
+  background: linear-gradient(to bottom, #020548, #16016c, #240046, #240046) no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Poppins', sans-serif; /* Default for all text */
+  color: #fff;
+  position: relative; /* So pseudo-elements can be positioned absolutely */
+}
 
-    // Increment visitedCount on marker click
-    marker.on("click", () => {
-      visitedCount++;
-      if (visitedCount === totalPoints) {
-        revealTransitionMessage();
-      }
-    });
-  });
+/* Create the 'stars' using a pseudo-element */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  /*
+    We'll create small white dots to simulate distant stars.
+    You can add more radial-gradients if you want more stars.
+  */
+  background:
+    radial-gradient(1px 1px at 20% 20%, rgba(255,255,255,0.8) 1%, transparent 1%),
+    radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,0.6) 1%, transparent 1%),
+    radial-gradient(1px 1px at 50% 80%, rgba(255,255,255,0.7) 1%, transparent 1%),
+    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.8) 1%, transparent 1%);
+  background-repeat: repeat;
+  background-size: 200px 200px;
 
-  /* ------------------------------------
-     C. Reveal Transition & World Map
-  --------------------------------------- */
-  function revealTransitionMessage() {
-    // Hide Naples map section (optional)
-    document.querySelector(".naples-map-section").style.display = "none";
+  /* Animation to make them twinkle slightly */
+  animation: twinkle 2s infinite alternate ease-in-out;
+  pointer-events: none; /* Let clicks pass through to underlying content */
+  z-index: -1; /* Place behind the .content container */
+}
 
-    // Show transition message
-    const transitionMsg = document.querySelector(".transition-message");
-    transitionMsg.classList.add("show-transition-message");
-
-    // After a short delay, reveal the world map
-    setTimeout(() => {
-      document.querySelector(".world-map-section").classList.add("show-world-map");
-      initWorldMap();
-    }, 2000);
+@keyframes twinkle {
+  0% {
+    opacity: 0.7;
   }
-
-  function initWorldMap() {
-    const worldMap = L.map("mapWorld").setView([20, 0], 2);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '© OpenStreetMap'
-    }).addTo(worldMap);
-
-    // Optional: add a marker or popup
-    // L.marker([20, 0]).addTo(worldMap).bindPopup("Let's fill our world with memories!");
+  100% {
+    opacity: 1;
   }
-});
+}
+
+/* ------------------------------------
+   4. Main Content Container
+--------------------------------------- */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 100vh; /* Enough scroll space */
+  position: relative;
+  z-index: 1; /* Above the star layer */
+}
+
+/* ------------------------------------
+   5. Title Section (Meddon font)
+--------------------------------------- */
+.title-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.title-section h1 {
+  font-family: 'Meddon', cursive; /* Title uses Meddon */
+  font-size: 4rem;
+  color: #f9d4d4; /* Soft pinkish tone for Christmas vibe */
+  animation: fadeout 3s forwards;
+  animation-delay: 2s; /* Wait 2 seconds, then fade out over 3s */
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+  }
+}
+
+/* ------------------------------------
+   6. Intro Text
+--------------------------------------- */
+.intro-text {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+/* ------------------------------------
+   7. Map Containers
+--------------------------------------- */
+.map-container {
+  width: 100%;
+  height: 600px;
+  margin: 2rem auto;
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+
+/* ------------------------------------
+   8. Transition Message (hidden initially)
+--------------------------------------- */
+.transition-message {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.show-transition-message {
+  opacity: 1 !important;
+}
+
+/* ------------------------------------
+   9. World Map Section (hidden initially)
+--------------------------------------- */
+.world-map-section {
+  min-height: 100vh;
+  display: none; 
+  align-items: center;
+  justify-content: center;
+}
+
+.show-world-map {
+  display: flex !important;
+}
+
+/* ------------------------------------
+   10. Final Paragraph
+--------------------------------------- */
+.final-paragraph {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
